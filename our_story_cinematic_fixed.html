@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — Vivek × Rishu</title>
+<meta name="theme-color" content="#17151a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --ink:#211d20; --cream:#f4eee5; --paper:#e9dfd1; --gold:#c69d62;
+  --night:#17151a; --muted:#8f8580;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto;background:var(--night)}
+body{margin:0;background:var(--night);color:var(--cream);font-family:"DM Sans",sans-serif;font-weight:300;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+#film{position:relative}
+.scene{height:100vh;min-height:680px;position:relative;overflow:hidden}
+.scene-inner{position:absolute;inset:0}
+.bg{position:absolute;inset:-8%;will-change:transform}
+.chapter-label{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,238,229,.58);margin-bottom:1rem}
+h1,h2,p{margin:0}
+.title{font-family:"Cormorant Garamond",serif;font-weight:500;line-height:.9;letter-spacing:-.03em}
+.script{font-family:"Kalam",cursive;font-weight:300}
+.copy{max-width:580px;font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.8;color:rgba(244,238,229,.82)}
+.eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
+.center{display:grid;place-items:center;text-align:center}
+.vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.22) 72%,rgba(0,0,0,.62));pointer-events:none}
+.grain{position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.08) 0 1px,transparent 1px);background-size:7px 7px;opacity:.1;transform:rotate(7deg);pointer-events:none}
+.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;opacity:.55;display:flex;flex-direction:column;gap:10px;align-items:center}
+.scroll-cue i{width:1px;height:42px;background:linear-gradient(var(--gold),transparent);display:block}
+.progress{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:80;width:1px;height:150px;background:rgba(255,255,255,.12)}
+.progress span{display:block;width:1px;height:0;background:var(--gold)}
+.sound{position:fixed;right:22px;top:22px;z-index:90;border:1px solid rgba(255,255,255,.16);background:rgba(20,18,21,.25);backdrop-filter:blur(10px);color:var(--cream);border-radius:100px;padding:9px 13px;font:inherit;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+
+/* Opening */
+#s0{background:radial-gradient(circle at 50% 70%,#3a2d2c 0,#1b181d 48%,#0d0c0e 100%)}
+#s0 .moon{position:absolute;width:12vw;height:12vw;min-width:100px;min-height:100px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff5da,#d9c7a1 58%,#907d66);box-shadow:0 0 90px rgba(232,204,151,.22);top:20%;right:19%}
+#s0 .field{position:absolute;bottom:-12%;left:-5%;width:110%;height:45%;background:linear-gradient(170deg,#29332d,#131a17);clip-path:ellipse(58% 58% at 50% 80%)}
+.opening-content{position:relative;z-index:2}
+.opening-content .title{font-size:clamp(5rem,15vw,13rem)}
+.opening-content .subtitle{margin-top:25px;font-family:"Kalam";font-size:clamp(1.1rem,2vw,1.6rem);color:#d6c4a8}
+.enter{margin-top:50px;display:inline-flex;align-items:center;gap:14px;color:var(--cream);font:inherit;background:none;border:0;cursor:pointer;letter-spacing:.2em;text-transform:uppercase;font-size:.65rem}
+.enter b{width:36px;height:36px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;font-weight:300}
+
+/* Chapter 1 */
+#s1{background:#b9c9bb}
+#s1 .sky{background:linear-gradient(#9eb7c0 0%,#d9d5bf 62%,#b18c67 100%)}
+#s1 .sun{position:absolute;width:26vw;height:26vw;border-radius:50%;background:#f2d39d;filter:blur(1px);left:13%;top:17%;box-shadow:0 0 100px rgba(244,208,142,.6)}
+#s1 .hills{position:absolute;bottom:-8%;width:115%;height:47%;left:-7%;background:#52685b;clip-path:polygon(0 65%,12% 48%,22% 58%,35% 36%,49% 56%,62% 39%,76% 57%,89% 31%,100% 52%,100% 100%,0 100%)}
+#s1 .grass{position:absolute;bottom:-12%;width:115%;height:33%;left:-7%;background:#34463c;border-radius:50% 50% 0 0/25% 25% 0 0}
+#s1 .content{position:relative;z-index:3;padding:10vh 9vw}
+#s1 .title{font-size:clamp(4rem,10vw,9rem);color:#292728;max-width:800px}
+#s1 .copy{color:#373133;margin-top:32px}
+.reveal-lines span{display:block;opacity:0;transform:translateY(22px)}
+
+/* Chapter 2 */
+#s2{background:#7b9bb5}
+#s2 .sky{background:linear-gradient(#6c91b1,#b5c6ce 62%,#dfc89d)}
+#s2 .cloud{position:absolute;border-radius:50%;filter:blur(1px);background:rgba(255,255,255,.42)}
+.c1{width:38vw;height:10vw;top:18%;left:-10%}.c2{width:31vw;height:8vw;top:39%;right:-7%}.c3{width:28vw;height:7vw;top:62%;left:10%}
+#plane{position:absolute;left:-12%;top:47%;width:110px;height:40px;z-index:3}
+#plane:before{content:"";position:absolute;left:0;top:15px;width:88px;height:3px;background:#f3eee3;border-radius:10px;transform:skew(-15deg)}
+#plane:after{content:"";position:absolute;left:38px;top:2px;border-left:27px solid transparent;border-right:8px solid transparent;border-bottom:15px solid #f3eee3;transform:rotate(10deg)}
+.flight{position:absolute;left:0;top:49%;height:1px;width:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:scaleX(0);transform-origin:left}
+#s2 .content{position:absolute;left:9vw;top:19%;z-index:4;max-width:600px}
+#s2 .title{font-size:clamp(4rem,9vw,8.5rem)}
+#s2 .copy{margin-top:30px}
+.distance{font-family:"Cormorant Garamond";font-size:clamp(5rem,13vw,12rem);line-height:.75;margin-top:35px;color:#fff0cf}
+
+/* Chapter 3 */
+#s3{background:#20222b}
+#s3 .rain{position:absolute;inset:-20%;background-image:linear-gradient(105deg,transparent 47%,rgba(210,221,235,.18) 48%,transparent 49%);background-size:12px 34px;transform:rotate(8deg)}
+#s3 .window{position:absolute;left:9vw;top:12vh;width:34vw;height:76vh;border:10px solid rgba(24,24,27,.72);box-shadow:0 0 80px rgba(0,0,0,.4);background:linear-gradient(#252b39,#101219);overflow:hidden;z-index:8}
+#s3 .window-light{position:absolute;width:80%;height:80%;left:10%;top:10%;background:radial-gradient(circle,#6b7284 0,#293040 45%,#12141b 75%);opacity:.55;z-index:1}
+#s3 .polaroid-frame{
+  position:absolute;
+  inset:8px;
+  width:calc(100% - 16px);
+  height:calc(100% - 16px);
+  object-fit:cover;
+  object-position:center;
+  z-index:10;
+  display:block;
+  border:8px solid #eee7dc;
+  box-shadow:0 18px 45px rgba(0,0,0,.45),0 3px 12px rgba(0,0,0,.3);
+  filter:saturate(.92) contrast(1.04);
+}
+#s3 .content{position:absolute;right:8vw;top:20%;width:42vw;z-index:12}
+#s3 .title{font-size:clamp(4rem,9vw,8.5rem)}
+#s3 .copy{margin-top:30px}
+#s3 .fight{margin-top:45px;font-family:"Cormorant Garamond";font-size:clamp(2.8rem,6vw,6rem);color:#e5c89b}
+
+/* Chapter 4 */
+#s4{background:#d8c9a8;color:#282327}
+#s4 .bg{background:linear-gradient(#a9c0c0 0%,#dfcfaa 55%,#8a9a73 100%)}
+#s4 .desk{position:absolute;bottom:0;left:-5%;width:110%;height:30%;background:#584438;transform:skewY(-2deg);z-index:2}
+#s4 .window2{position:absolute;right:10%;top:10%;width:27vw;height:44vh;background:linear-gradient(#91b4c4,#e5d2a7);border:10px solid #51453e;overflow:hidden;z-index:8}
+#s4 .polaroid-frame2{
+  position:absolute;
+  inset:8px;
+  width:calc(100% - 16px);
+  height:calc(100% - 16px);
+  object-fit:cover;
+  object-position:center;
+  z-index:10;
+  display:block;
+  border:8px solid #f1eadf;
+  box-shadow:0 18px 45px rgba(0,0,0,.38),0 3px 12px rgba(0,0,0,.25);
+  filter:saturate(.95) contrast(1.04);
+}
+#s4 .content{position:absolute;left:9vw;top:14%;z-index:12;max-width:760px}
+#s4 .title{font-size:clamp(4rem,9vw,8.5rem)}
+#s4 .copy{margin-top:28px;color:#41383a}
+.milestones{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap}
+.milestone{
+  position:relative;
+  min-width:190px;
+  padding:18px 20px 17px;
+  background:rgba(250,246,238,.90);
+  border:1px solid rgba(70,58,48,.22);
+  border-radius:4px;
+  box-shadow:0 12px 28px rgba(55,42,32,.16),inset 0 1px rgba(255,255,255,.7);
+  backdrop-filter:blur(8px);
+}
+.milestone::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#b78b58}
+.milestone strong{display:block;font-family:"Cormorant Garamond";font-size:1.65rem;line-height:1;font-weight:600;color:#292326}
+.milestone span{display:block;font-size:.78rem;line-height:1.5;margin-top:8px;color:#5c514c}
+.paths{position:absolute;bottom:12%;left:0;width:100%;height:90px;z-index:3}
+.path{position:absolute;height:3px;width:42%;background:#4c5d4b;bottom:20px;border-radius:100%;transform-origin:left}
+.path.a{left:8%;transform:rotate(-5deg)}.path.b{right:8%;transform:rotate(5deg);transform-origin:right}
+
+/* Chapter 5 */
+#s5{background:#0d1117}
+#s5 .sky{background:radial-gradient(circle at 50% 45%,#38465c 0,#151c27 44%,#07090d 82%)}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#eee4c9;opacity:.7}
+#s5 .content{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:3}
+#s5 .title{font-size:clamp(5rem,14vw,12rem)}
+#s5 .copy{margin-top:30px;max-width:500px}
+.light{position:absolute;width:18px;height:18px;border-radius:50%;background:#f3d7a3;box-shadow:0 0 55px 18px rgba(243,215,163,.16);bottom:26%;z-index:2}
+.light.l{left:34%}.light.r{right:34%}
+
+/* Chapter 6 */
+#s6{background:#33241e}
+#s6 .bg{background:linear-gradient(#4f7180 0%,#d0ad83 52%,#4b2e26 100%)}
+#s6 .sunset{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);width:18vw;height:18vw;border-radius:50%;background:#f3c783;box-shadow:0 0 130px rgba(244,199,131,.5)}
+#s6 .ground{position:absolute;bottom:-8%;left:-5%;width:110%;height:40%;background:#392722;border-radius:50% 50% 0 0/18% 18% 0 0}
+#s6 .content{position:relative;z-index:4;text-align:center;padding-top:10vh}
+#s6 .title{font-size:clamp(4rem,10vw,9rem)}
+#s6 .copy{margin:30px auto 0;max-width:620px}
+.ritual{display:flex;justify-content:center;gap:10px;margin-top:35px;flex-wrap:wrap}
+.ritual span{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);padding:9px 12px;border-radius:100px;background:rgba(20,15,14,.12);backdrop-filter:blur(8px)}
+
+/* Finale */
+#s7{background:#17141a}
+#s7 .sunrise{position:absolute;inset:0;background:linear-gradient(#16131a 0%,#2b2630 43%,#b67f68 78%,#e3bc91 100%)}
+#s7 .horizon{position:absolute;bottom:0;left:-5%;width:110%;height:28%;background:#292125;border-radius:50% 50% 0 0/25% 25% 0 0}
+#s7 .content{position:relative;z-index:3;padding:14vh 8vw}
+#s7 .title{font-size:clamp(4rem,10vw,9rem);max-width:900px}
+#s7 .copy{margin-top:40px}
+.final-lines{margin-top:40px;font-family:"Cormorant Garamond";font-size:clamp(1.5rem,3vw,2.8rem);line-height:1.35}
+.final-lines div{opacity:.25}
+.final{position:absolute;right:9vw;bottom:12vh;text-align:right;z-index:3}
+.final .names{font-family:"Cormorant Garamond";font-size:clamp(2.5rem,5vw,5rem)}
+.final .continued{font-family:"Kalam";font-size:1.4rem;color:#d5b482;margin-top:10px}
+.thank-you{margin-top:22px;font-family:"Kalam";font-size:clamp(1.15rem,2.2vw,1.6rem);color:#e1bd91;opacity:.9;line-height:1.4}
+.footer{margin-top:15px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.45}
+
+/* Three.js cinematic layer */
+#threeCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;opacity:.58;mix-blend-mode:screen}
+.three-caption{position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:6;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;opacity:.45;white-space:nowrap;pointer-events:none}
+#s2 .three-caption{color:#fff5df}#s5 .three-caption{color:#d8e8ff}#s6 .three-caption{color:#f5d4a0}
+
+/* Full-screen star veil */
+#starVeil{position:fixed;inset:0;z-index:400;display:block}
+.veil-prompt{position:fixed;inset:0;z-index:401;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer}
+.veil-line{font-family:"Kalam",cursive;color:var(--cream);font-size:clamp(.85rem,2vw,1.05rem);letter-spacing:.1em;text-transform:uppercase;opacity:.9;padding:15px 26px;border:1px solid rgba(255,255,255,.2);border-radius:100px;backdrop-filter:blur(6px);background:rgba(20,18,21,.3)}
+#camPreview{display:none;width:1px;height:1px;opacity:0}
+
+/* Persistent reading light */
+#lightMask{position:fixed;inset:0;z-index:50;pointer-events:none;background:rgba(9,7,11,.95);-webkit-mask-image:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,44%),transparent 0,transparent var(--spot-r,0px),#000 calc(var(--spot-r,0px) + 130px));mask-image:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,44%),transparent 0,transparent var(--spot-r,0px),#000 calc(var(--spot-r,0px) + 130px));opacity:0;transition:opacity .5s ease}
+#lightMask.active{opacity:1}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  #lightMask{background:rgba(9,7,11,.4);-webkit-backdrop-filter:blur(17px) brightness(.62);backdrop-filter:blur(17px) brightness(.62)}
+}
+
+/* responsive */
+@media(max-width:800px){
+  .scene{min-height:760px}
+  .progress{left:10px;height:100px}
+  .sound{right:12px;top:12px}
+  #s1 .content,#s2 .content,#s3 .content,#s4 .content,#s7 .content{left:7vw;right:7vw;width:auto;top:14%}
+  #s1 .sun{width:48vw;height:48vw;top:12%;left:10%}
+  #s1 .hills{height:38%}
+  #s2 .content{top:17%}.distance{font-size:6rem}
+  #s3 .window{left:7vw;top:10vh;width:38vw;height:42vh}
+  #s3 .content{top:50%;width:auto}
+  #s4 .window2{width:38vw;height:30vh;right:7%;top:7%}
+  #s4 .content{top:36%}
+  .milestones{gap:10px;margin-top:30px}
+  .milestone{min-width:0;flex:1 1 140px;padding:15px 16px}
+  .milestone strong{font-size:1.4rem}
+  .milestone span{font-size:.72rem}
+  .light.l{left:28%}.light.r{right:28%}
+  #s6 .content{padding:12vh 7vw 0}.ritual{gap:7px}
+  .final{left:7vw;right:7vw;bottom:9vh;text-align:left}
+  #s7 .title{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas id="threeCanvas"></canvas>
+<canvas id="starVeil"></canvas>
+<div id="veilPrompt" class="veil-prompt"><div class="veil-line" id="veilLine">touch to begin</div></div>
+<video id="camPreview" playsinline muted></video>
+<div id="lightMask"></div>
+
+<div id="film">
+  <button class="sound" id="sound">sound off</button>
+  <div class="progress"><span id="progressBar"></span></div>
+
+  <section class="scene center" id="s0">
+    <div class="scene-inner">
+      <div class="moon"></div><div class="field"></div><div class="vignette"></div><div class="grain"></div>
+    </div>
+    <div class="opening-content">
+      <div class="chapter-label">OUR STORY</div>
+      <h1 class="title">OUR<br>STORY</h1>
+      <div class="subtitle">Still being written.</div>
+      <button class="enter" id="enter"><b>↓</b> enter our story</button>
+    </div>
+    <div class="scroll-cue">begin<i></i></div>
+  </section>
+
+  <section class="scene" id="s1">
+    <div class="scene-inner bg sky"></div><div class="sun"></div><div class="hills"></div><div class="grass"></div>
+    <div class="content">
+      <div class="chapter-label">Chapter 01</div>
+      <h2 class="title">WE FOUND<br>EACH OTHER</h2>
+      <div class="copy reveal-lines">
+        <span>This is where our story began.</span>
+        <span>Two people found something meaningful in each other.</span>
+        <span>What started as a relationship slowly became something deeper.</span>
+        <span>Companionship. Comfort. Someone worth choosing.</span>
+        <span>It wasn't a perfect beginning.</span>
+        <span>It was simply the beginning of finding someone important enough to keep choosing.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="scene-inner bg sky"></div>
+    <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    <div class="flight"></div><div id="plane"></div>
+    <div class="content">
+      <div class="chapter-label">Chapter 02</div>
+      <h2 class="title">WE CHOSE<br>EACH OTHER</h2>
+      <div class="copy reveal-lines">
+        <span>Then came the realization of distance.</span>
+        <span>Loving each other would require effort.</span>
+        <span>Distance didn't make us disappear.</span>
+        <span>It made the choice more deliberate.</span>
+        <span>There is a difference between saying, “I'd go anywhere for you.”</span>
+        <span>and actually getting on a plane.</span>
+        <span><strong>I came to you.</strong></span>
+        <span>And you came for me too.</span>
+      </div>
+      <div class="distance">1,300+ km</div><div class="three-caption">two places · one direction</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="scene-inner"></div><div class="rain"></div>
+    <div class="window">
+      <div class="window-light"></div>
+      <img src="https://raw.githubusercontent.com/alwaysvivek/newrishugift/862478ddb217671d97702041e0900f822709305d/WhatsApp%20Image%202026-09-05%20at%2010.45.38.jpeg" alt="We fought for us" class="polaroid-frame">
+    </div>
+    <div class="content">
+      <div class="chapter-label">Chapter 03</div>
+      <h2 class="title">WE FOUGHT<br>FOR EACH OTHER</h2>
+      <div class="copy reveal-lines">
+        <span>Loving each other wasn't always easy.</span>
+        <span>External circumstances put serious pressure around us.</span>
+        <span>Communication became difficult. Our choices were questioned.</span>
+        <span>There were moments when everything made choosing each other harder.</span>
+        <span>We weren't trying to fight the world.</span>
+        <span>We were simply trying not to lose each other.</span>
+      </div>
+      <div class="fight">We fought for us.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="scene-inner bg"></div>
+    <div class="window2">
+      <img src="https://raw.githubusercontent.com/alwaysvivek/newrishugift/862478ddb217671d97702041e0900f822709305d/WhatsApp%20Image%202026-09-05%20at%2010.45.38%20(1).jpeg" alt="We built for us" class="polaroid-frame2">
+    </div>
+    <div class="desk"></div>
+    <div class="paths"><div class="path a"></div><div class="path b"></div></div>
+    <div class="content">
+      <div class="chapter-label">Chapter 04</div>
+      <h2 class="title">WE BUILT<br>FOR EACH OTHER</h2>
+      <div class="copy reveal-lines">
+        <span>Eventually, our story became about more than surviving.</span>
+        <span>I started building my career, earning, and planning for independence.</span>
+        <span>Not simply for work or money — but for the freedom to make our own choices.</span>
+        <span>And while I was building myself, you were growing too.</span>
+      </div>
+      <div class="milestones">
+        <div class="milestone"><strong>CA Foundation</strong><span>You cleared it.</span></div>
+        <div class="milestone"><strong>College</strong><span>You made it through your first year.</span></div>
+        <div class="milestone"><strong>You grew</strong><span>Stronger than before.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="scene-inner sky"></div>
+    <div class="star" style="left:12%;top:18%"></div><div class="star" style="left:24%;top:31%"></div><div class="star" style="left:39%;top:14%"></div>
+    <div class="star" style="left:61%;top:21%"></div><div class="star" style="left:79%;top:15%"></div><div class="star" style="left:88%;top:38%"></div>
+    <div class="star" style="left:70%;top:47%"></div><div class="star" style="left:17%;top:54%"></div>
+    <div class="light l"></div><div class="light r"></div>
+    <div class="content">
+      <div class="chapter-label">Chapter 05</div>
+      <h2 class="title">WE<br>STAYED</h2>
+      <div class="copy">The distance. The uncertainty. The pressure. The difficult periods. The communication gaps. The fear of losing each other.<br><br>There were moments when letting go would have been easier.<br><br>But somehow… we were still here.<br><br>Not because everything was perfect. Because, again and again, we chose not to let go.</div>
+    <div class="three-caption">some lights are worth following</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s6">
+    <div class="scene-inner bg"></div><div class="sunset"></div><div class="ground"></div>
+    <div class="content">
+      <div class="chapter-label">Chapter 06</div>
+      <h2 class="title">WE FINALLY<br>SAID YES <span style="font-size:.55em">♡</span></h2>
+      <div class="copy">After everything we've been through, we're choosing the next chapter. Quietly. Privately. Just our promise to each other.</div>
+      <div class="ritual">
+        <span>Puja</span><span>Diwali wishes</span><span>Gifts</span><span>Sweets</span><span>Tilak</span><span>Clothes</span>
+      </div>
+      <div class="three-caption">a promise takes shape</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s7">
+    <div class="scene-inner sunrise"></div><div class="horizon"></div>
+    <div class="content">
+      <div class="chapter-label">The next chapter</div>
+      <h2 class="title">THIS ISN'T<br>THE END.</h2>
+      <div class="final-lines">
+        <div>We found each other.</div>
+        <div>We chose each other.</div>
+        <div>We fought for each other.</div>
+        <div>We built for each other.</div>
+        <div>We stayed.</div>
+        <div>And now, we're choosing each other officially.</div>
+      </div>
+    </div>
+    <div class="final">
+      <div class="names">Vivek × Rishu</div>
+      <div class="continued">To be continued…</div>
+      <div class="thank-you">thank you, rishubaby.<br>I love you.</div>
+      <div class="footer">Our story — still being written</div>
+    </div>
+  </section>
+</div>
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js";
+window.THREE = THREE;
+gsap.registerPlugin(ScrollTrigger);
+
+const threeLayer=document.getElementById("threeCanvas");
+const camPreview=document.getElementById("camPreview");
+let camStream=null,camCanvas=null,camCtx=null,camReady=false,micReady=false;
+let micAnalyser=null,micData=null,revealed=false,revealTriggered=false,burstEnergy=0;
+
+window.__requestReactiveAccess__=async()=>false;
+window.__triggerReveal__=()=>{if(revealTriggered)return;revealTriggered=true;revealed=true;if(window.__disperseVeil)window.__disperseVeil()};
+
+(function setupStarVeil(){
+  const veil=document.getElementById("starVeil"),prompt=document.getElementById("veilPrompt"),veilLine=document.getElementById("veilLine");
+  if(!veil||!prompt)return;
+  const vctx=veil.getContext("2d");let stars=[],bursting=false;
+
+  function drawStars(){
+    if(bursting)return;
+    const dpr=Math.min(devicePixelRatio||1,2);
+    veil.width=innerWidth*dpr;veil.height=innerHeight*dpr;veil.style.width=innerWidth+"px";veil.style.height=innerHeight+"px";
+    vctx.setTransform(dpr,0,0,dpr,0,0);vctx.fillStyle="#0b090f";vctx.fillRect(0,0,innerWidth,innerHeight);
+    const count=Math.round((innerWidth*innerHeight)/1600);stars=[];
+    for(let i=0;i<count;i++)stars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()<.12?1.4+Math.random()*1.3:.5+Math.random()*.8,a:.3+Math.random()*.7});
+    stars.forEach(s=>{vctx.beginPath();vctx.fillStyle=`rgba(244,238,229,${s.a})`;vctx.arc(s.x,s.y,s.r,0,Math.PI*2);vctx.fill()});
+  }
+  drawStars();addEventListener("resize",drawStars);
+
+  function disperseVeil(){
+    if(bursting)return;bursting=true;veil.style.pointerEvents="none";
+    const cx=innerWidth/2,cy=innerHeight/2;
+    stars.forEach(s=>{
+      const dx=s.x-cx,dy=s.y-cy,dist=Math.hypot(dx,dy)||1,dirX=dx/dist,dirY=dy/dist,speed=260+Math.random()*480,swirl=(Math.random()-.5)*.7;
+      s.vx=dirX*speed-dirY*speed*swirl;s.vy=dirY*speed+dirX*speed*swirl-90;s.life=1;
+    });
+    gsap.to(prompt,{opacity:0,duration:.4,onComplete:()=>prompt.remove()});
+    let last=performance.now(),gravity=420,dragPerSec=.16;
+    function burstFrame(now){
+      const dt=Math.min(.04,(now-last)/1000);last=now;vctx.clearRect(0,0,innerWidth,innerHeight);let anyAlive=false;
+      const dragFactor=Math.pow(1-dragPerSec,dt*60);
+      stars.forEach(s=>{
+        if(s.life<=0)return;
+        s.vx*=dragFactor;s.vy=s.vy*dragFactor+gravity*dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.life-=dt*.75;
+        if(s.life>0){anyAlive=true;vctx.beginPath();vctx.fillStyle=`rgba(244,238,229,${Math.max(0,s.a*s.life)})`;vctx.arc(s.x,s.y,s.r,0,Math.PI*2);vctx.fill()}
+      });
+      if(anyAlive)requestAnimationFrame(burstFrame);else veil.remove();
+    }
+    requestAnimationFrame(burstFrame);
+  }
+  window.__disperseVeil=disperseVeil;
+
+  let tapped=false;
+  prompt.addEventListener("click",async()=>{
+    if(tapped)return;
+    tapped=true;
+    veilLine.textContent="hold a bright light close to the camera";
+    const ok=await window.__requestReactiveAccess__();
+    if(!ok){
+      veilLine.textContent="camera access is needed to begin";
+      tapped=false;
+      return;
+    }
+    setTimeout(()=>{if(!revealed)veilLine.textContent="hold a bright light close to the camera";},400);
+  },{once:false});
+})();
+
+if(window.THREE&&threeLayer){
+  const scene3=new THREE.Scene();
+  const camera3=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,100);camera3.position.z=7;
+  const renderer3=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:"low-power"});
+  renderer3.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer3.setSize(innerWidth,innerHeight);threeLayer.replaceWith(renderer3.domElement);renderer3.domElement.id="threeCanvas";
+
+  const count=innerWidth<700?220:340,positions=new Float32Array(count*3),base=new Float32Array(count*3),phases=new Float32Array(count),twinkleSpeed=new Float32Array(count),starSizes=new Float32Array(count);
+  for(let i=0;i<count;i++){
+    const i3=i*3,r=2.1+Math.random()*5.4,a=Math.random()*Math.PI*2,z=(Math.random()-.5)*4.5;
+    positions[i3]=base[i3]=Math.cos(a)*r;positions[i3+1]=base[i3+1]=Math.sin(a)*r*.62;positions[i3+2]=base[i3+2]=z;
+    phases[i]=Math.random()*Math.PI*2;twinkleSpeed[i]=.6+Math.random()*2.2;starSizes[i]=.4+Math.random();
+  }
+  function makeStarTexture(){
+    const s=64,c=document.createElement("canvas");c.width=c.height=s;const ctx=c.getContext("2d"),g=ctx.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+    g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(.35,"rgba(255,255,255,.7)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(0,0,s,s);return new THREE.CanvasTexture(c);
+  }
+  const starTex=makeStarTexture(),geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(positions,3));
+  const mat=new THREE.PointsMaterial({map:starTex,color:0xeaf1ff,size:.065,transparent:true,opacity:.62,depthWrite:false,sizeAttenuation:true,blending:THREE.AdditiveBlending});
+  const points=new THREE.Points(geo,mat);scene3.add(points);
+
+  function makeCometTexture(){
+    const w=128,h=16,c=document.createElement("canvas");c.width=w;c.height=h;const ctx=c.getContext("2d"),g=ctx.createLinearGradient(0,0,w,0);
+    g.addColorStop(0,"rgba(255,255,255,0)");g.addColorStop(.7,"rgba(255,255,255,.35)");g.addColorStop(1,"rgba(255,255,255,1)");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);return new THREE.CanvasTexture(c);
+  }
+  const cometTex=makeCometTexture(),cometPalette=[0xfff3da,0xdfeaff,0xffffff,0xffd9b0],METEOR_COUNT=6,meteors=[];
+  for(let i=0;i<METEOR_COUNT;i++){
+    const m=new THREE.SpriteMaterial({map:cometTex,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}),spr=new THREE.Sprite(m);
+    spr.scale.set(0,.03,1);scene3.add(spr);meteors.push({sprite:spr,active:false,t:0,dur:1,start:new THREE.Vector3(),end:new THREE.Vector3(),len:1.6,ang:0});
+  }
+  function spawnMeteor(boost){
+    const slot=meteors.find(m=>!m.active)||meteors[0],edge=Math.random();let sx,sy;
+    if(edge<.5){sx=-6.5-Math.random()*1.5;sy=2.6-Math.random()*4}else{sx=2+Math.random()*3;sy=3.2+Math.random()*1.2}
+    const angle=-.35-Math.random()*.5,dist=4+Math.random()*3.5;
+    slot.start.set(sx,sy,(Math.random()-.5)*2.5);slot.end.set(sx+Math.cos(angle)*dist,sy+Math.sin(angle)*dist,slot.start.z);
+    slot.len=1.1+Math.random()*.9;slot.ang=angle;slot.dur=.7+Math.random()*.6;slot.t=0;slot.active=true;slot.brightness=Math.min(1.6,.85+boost*.9);
+    slot.sprite.material.color.setHex(cometPalette[(Math.random()*cometPalette.length)|0]);slot.sprite.material.rotation=angle;
+  }
+  let meteorTimer=2.5,prevLevel=.12,lastSpike=0;
+  function updateMeteors(dt,level,tSec){
+    meteorTimer-=dt;
+    if(meteorTimer<=0){spawnMeteor(.15);meteorTimer=!revealed?5+Math.random()*6:3+Math.random()*4}
+    if(revealed){const spikeUp=level-prevLevel;if(spikeUp>.16&&tSec-lastSpike>.5){spawnMeteor(Math.min(1,spikeUp*2.2));if(spikeUp>.4)spawnMeteor(1);lastSpike=tSec}}
+    prevLevel=level;
+    meteors.forEach(m=>{
+      if(!m.active)return;m.t+=dt/m.dur;
+      if(m.t>=1){m.active=false;m.sprite.material.opacity=0;m.sprite.scale.set(0,.03,1);return}
+      const p=m.start.clone().lerp(m.end,m.t),envelope=Math.sin(Math.PI*Math.min(1,m.t));
+      m.sprite.position.copy(p);m.sprite.material.opacity=envelope*(.75+(m.brightness-1)*.5);m.sprite.scale.set(m.len*(.5+envelope*.9),.035+envelope*.05,1);
+    });
+  }
+
+  const chapterGroup=new THREE.Group();scene3.add(chapterGroup);const FIELD_COUNT=innerWidth<700?260:420;
+  const fieldBase=new Float32Array(FIELD_COUNT*3),fieldPos=new Float32Array(FIELD_COUNT*3),fieldPhase=new Float32Array(FIELD_COUNT),flowY=new Float32Array(FIELD_COUNT),flowX=new Float32Array(FIELD_COUNT);
+  for(let i=0;i<FIELD_COUNT;i++){const i3=i*3;fieldBase[i3]=(Math.random()-.5)*11;fieldBase[i3+1]=(Math.random()-.5)*6.4;fieldBase[i3+2]=(Math.random()-.5)*3.2-1;fieldPos.set([fieldBase[i3],fieldBase[i3+1],fieldBase[i3+2]],i3);fieldPhase[i]=Math.random()*Math.PI*2;flowY[i]=(Math.random()-.5)*6;flowX[i]=(Math.random()-.5)*11}
+  const fieldGeo=new THREE.BufferGeometry();fieldGeo.setAttribute("position",new THREE.BufferAttribute(fieldPos,3));
+  const fieldMat=new THREE.PointsMaterial({map:starTex,color:0xf4e2b8,size:.028,transparent:true,opacity:.7,depthWrite:false,sizeAttenuation:true,blending:THREE.AdditiveBlending});
+  const chapterField=new THREE.Points(fieldGeo,fieldMat);chapterGroup.add(chapterField);
+  const routePoints=[];for(let i=0;i<90;i++){const t=i/89;routePoints.push(new THREE.Vector3(-5.5+t*11,Math.sin(t*Math.PI*2)*.75+.35*Math.sin(t*10),-1))}
+  const routeGeo=new THREE.BufferGeometry().setFromPoints(routePoints),routeMat=new THREE.LineBasicMaterial({color:0xf0c98a,transparent:true,opacity:0}),route=new THREE.Line(routeGeo,routeMat);chapterGroup.add(route);
+  const orbGeo=new THREE.SphereGeometry(.075,16,16),orbMatA=new THREE.MeshBasicMaterial({color:0xffdfad,transparent:true,opacity:0}),orbMatB=new THREE.MeshBasicMaterial({color:0xd9e8ff,transparent:true,opacity:0}),orbA=new THREE.Mesh(orbGeo,orbMatA),orbB=new THREE.Mesh(orbGeo,orbMatB);
+  orbA.position.set(-2.5,-1.2,-.5);orbB.position.set(2.5,-1.2,-.5);chapterGroup.add(orbA,orbB);
+  const chapterLooks=[
+    {color:0xf4e2b8,size:.028,opacity:.7,driftY:.35,driftX:.10},{color:0xd39a49,size:.030,opacity:.62,driftY:.55,driftX:.12},
+    {color:0xffffff,size:.024,opacity:.68,driftY:.12,driftX:1.1},{color:0xbfd6ff,size:.020,opacity:.62,driftY:-1.3,driftX:.10},
+    {color:0xc79a5c,size:.027,opacity:.6,driftY:.30,driftX:.18},{color:0xdcebff,size:.030,opacity:.66,driftY:.10,driftX:.06},
+    {color:0xf3c78a,size:.032,opacity:.72,driftY:.5,driftX:.14},{color:0xf6d3ab,size:.030,opacity:.7,driftY:.38,driftX:.16}
+  ];
+  const driftState={y:chapterLooks[0].driftY,x:chapterLooks[0].driftX};let chapterState=0;
+  function setChapterState(n){
+    chapterState=n;const look=chapterLooks[n]||chapterLooks[0],c=new THREE.Color(look.color);
+    gsap.to(fieldMat.color,{r:c.r,g:c.g,b:c.b,duration:1.4,ease:"sine.inOut"});gsap.to(fieldMat,{size:look.size,opacity:look.opacity,duration:1.4,ease:"sine.inOut"});gsap.to(driftState,{y:look.driftY,x:look.driftX,duration:1.6,ease:"sine.inOut"});
+    gsap.to(routeMat,{opacity:n===2?.52:0,duration:1});gsap.to(orbMatA,{opacity:n===5?.9:0,duration:1});gsap.to(orbMatB,{opacity:n===5?.9:0,duration:1});
+  }
+  ["s0","s1","s2","s3","s4","s5","s6","s7"].forEach((id,i)=>ScrollTrigger.create({trigger:"#"+id,start:"top 55%",end:"bottom 45%",onEnter:()=>setChapterState(i),onEnterBack:()=>setChapterState(i)}));
+
+  let smoothedLevel=.12,lastCamBrightness=null;
+  function camLevel(){
+    if(!(camReady&&camCtx&&camCanvas))return{level:0,brightness:null,delta:0};
+    const d=camCtx.getImageData(0,0,32,24).data;let sum=0;
+    for(let i=0;i<d.length;i+=4)sum+=(d[i]+d[i+1]+d[i+2])/3;
+    const brightness=sum/(d.length/4)/255,delta=lastCamBrightness===null?0:Math.abs(brightness-lastCamBrightness);lastCamBrightness=brightness;
+    return{level:Math.min(1,delta*14+brightness*.3),brightness,delta};
+  }
+  function micLevel(){
+    if(!(micReady&&micAnalyser))return 0;micAnalyser.getByteTimeDomainData(micData);let sumSq=0;
+    for(let i=0;i<micData.length;i++){const v=(micData[i]-128)/128;sumSq+=v*v}return Math.min(1,Math.sqrt(sumSq/micData.length)*6);
+  }
+  function rawLevel(){
+    const cam=camLevel(),voice=micLevel();
+    if(!revealed){
+      if(!revealTriggered&&cam.brightness!==null&&(cam.brightness>.78||(cam.delta>.28&&cam.brightness>.45)))triggerReveal();
+      return .12;
+    }
+    return Math.max(.12,cam.level,voice);
+  }
+  function getLevel(){const target=rawLevel(),k=target>smoothedLevel?.45:.08;smoothedLevel+=(target-smoothedLevel)*k;return smoothedLevel}
+  function triggerReveal(){if(revealTriggered)return;revealTriggered=true;revealed=true;burstEnergy=1;spawnMeteor(1);spawnMeteor(.85);if(window.__disperseVeil)window.__disperseVeil()}
+
+  let tiltTargetX=0,tiltTargetY=0,tiltX=0,tiltY=0;
+  function onPointerTilt(e){tiltTargetX=(e.clientX/innerWidth-.5)*2;tiltTargetY=(e.clientY/innerHeight-.5)*2}
+  addEventListener("mousemove",onPointerTilt,{passive:true});
+  function onDeviceTilt(e){if(e.gamma===null&&e.beta===null)return;const gamma=Math.max(-40,Math.min(40,e.gamma||0)),beta=Math.max(-40,Math.min(40,(e.beta||0)-45));tiltTargetX=gamma/40;tiltTargetY=beta/40}
+  function enableDeviceTilt(){
+    if(typeof DeviceOrientationEvent!=="undefined"&&typeof DeviceOrientationEvent.requestPermission==="function")DeviceOrientationEvent.requestPermission().then(state=>{if(state==="granted")addEventListener("deviceorientation",onDeviceTilt)}).catch(()=>{});
+    else if("DeviceOrientationEvent"in window)addEventListener("deviceorientation",onDeviceTilt);
+  }
+  document.getElementById("enter")?.addEventListener("click",enableDeviceTilt,{once:true});addEventListener("touchstart",enableDeviceTilt,{once:true,passive:true});
+
+  const lightMask=document.getElementById("lightMask");let opennessState=0;
+  const gateUsable=()=>camReady;let ambientBrightness=null,flashOn=false;
+  function trackAmbient(camNow){
+    if(camNow.brightness===null)return;const b=camNow.brightness;
+    if(ambientBrightness===null){ambientBrightness=b;return}
+    if(!flashOn){if(b<ambientBrightness)ambientBrightness=b;else ambientBrightness+=(b-ambientBrightness)*.0025}
+    const jump=b-ambientBrightness;
+    if(!flashOn){if(jump>.14||b>.68)flashOn=true}else if(jump<.06)flashOn=false;
+  }
+  function updateLightGate(camNow){
+    trackAmbient(camNow);if(!lightMask)return;
+    if(!revealed||!gateUsable()){lightMask.classList.remove("active");return}
+    lightMask.classList.add("active");const target=flashOn?1:0,k=target>opennessState?.5:.1;opennessState+=(target-opennessState)*k;
+    const maxR=Math.hypot(innerWidth,innerHeight),radius=opennessState<.015?0:24+opennessState*maxR;
+    lightMask.style.setProperty("--spot-r",radius+"px");lightMask.style.setProperty("--spot-x",(50+tiltX*9)+"%");lightMask.style.setProperty("--spot-y",(44+tiltY*7)+"%");
+  }
+
+  let lastT=0,voiceSmoothed=0;
+  function animate3(t){
+    requestAnimationFrame(animate3);const tSec=t*.001,dt=Math.min(.05,tSec-lastT||0);lastT=tSec;const time=t*.00025;
+    const camNow=camLevel(),voice=micLevel(),level=getLevel(),pos=geo.attributes.position.array,boosted=revealed?level*1.8:level;
+    burstEnergy*=.945;const breath=.05+boosted*.28+burstEnergy*1.5;
+    for(let i=0;i<count;i++){const i3=i*3,ph=phases[i];pos[i3]=base[i3]+Math.sin(time*2.1+ph)*breath;pos[i3+1]=base[i3+1]+Math.cos(time*1.7+ph)*breath*.72;pos[i3+2]=base[i3+2]+Math.sin(time*1.2+ph)*breath*.35}
+    geo.attributes.position.needsUpdate=true;points.rotation.y=time*.65;points.rotation.x=Math.sin(time*.6)*.04;
+    const shimmer=Math.sin(tSec*1.4)*.06+Math.sin(tSec*3.1+1.7)*.04;mat.opacity=.34+shimmer+boosted*.4;mat.size=.045+boosted*.05;
+    updateMeteors(dt,boosted,tSec);
+    voiceSmoothed+=(voice-voiceSmoothed)*(voice>voiceSmoothed?.55:.12);
+    const fPos=fieldGeo.attributes.position.array,fBreath=.06+voiceSmoothed*.85+burstEnergy*1.1;
+    for(let i=0;i<FIELD_COUNT;i++){
+      const i3=i*3,ph=fieldPhase[i];flowY[i]+=driftState.y*dt*.5;flowX[i]+=driftState.x*dt*.5;
+      if(flowY[i]>3.2)flowY[i]-=6.4;if(flowY[i]<-3.2)flowY[i]+=6.4;if(flowX[i]>6)flowX[i]-=12;if(flowX[i]<-6)flowX[i]+=12;
+      fPos[i3]=fieldBase[i3]+Math.sin(time*1.6+ph)*fBreath+flowX[i]*.35;fPos[i3+1]=fieldBase[i3+1]+Math.cos(time*1.3+ph)*fBreath*.7+flowY[i]*.35;fPos[i3+2]=fieldBase[i3+2]+Math.sin(time*.9+ph)*fBreath*.4;
+    }
+    fieldGeo.attributes.position.needsUpdate=true;chapterField.rotation.y=time*.22;
+    fieldMat.size=(chapterLooks[chapterState]||chapterLooks[0]).size*(1+voiceSmoothed*1.6);fieldMat.opacity=Math.min(1,(chapterLooks[chapterState]||chapterLooks[0]).opacity+voiceSmoothed*.28);chapterGroup.scale.setScalar(1+voiceSmoothed*.14);
+    if(chapterState===2){route.position.y=Math.sin(tSec*.7)*.03;route.rotation.z=Math.sin(tSec*.25)*.025}
+    if(chapterState===5){const kk=(Math.sin(tSec*.8)+1)/2;orbA.position.x=-2.5+kk*2;orbB.position.x=2.5-kk*2;orbA.position.y=orbB.position.y=-1.2+Math.sin(tSec)*.06}
+    updateLightGate(camNow);tiltX+=(tiltTargetX-tiltX)*.06;tiltY+=(tiltTargetY-tiltY)*.06;scene3.rotation.y=tiltX*.18;scene3.rotation.x=-tiltY*.12;camera3.position.x=tiltX*.6;camera3.position.y=-tiltY*.4;camera3.lookAt(0,0,0);renderer3.render(scene3,camera3);
+  }
+  animate3(0);
+  function resize3(){camera3.aspect=innerWidth/innerHeight;camera3.updateProjectionMatrix();renderer3.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer3.setSize(innerWidth,innerHeight)}
+  addEventListener("resize",resize3);
+
+  async function requestReactiveAccess(){
+    if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return false;
+    try{
+      camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"user"},width:{ideal:160},height:{ideal:120}},audio:true});
+      camPreview.srcObject=camStream;await camPreview.play();camCanvas=document.createElement("canvas");camCanvas.width=32;camCanvas.height=24;camCtx=camCanvas.getContext("2d",{willReadFrequently:true});camReady=true;
+      const audioTracks=camStream.getAudioTracks();
+      if(audioTracks.length){const ac=new(window.AudioContext||window.webkitAudioContext)(),source=ac.createMediaStreamSource(new MediaStream(audioTracks));micAnalyser=ac.createAnalyser();micAnalyser.fftSize=256;micData=new Uint8Array(micAnalyser.frequencyBinCount);source.connect(micAnalyser);micReady=true}
+      return true;
+    }catch(err){console.warn("Camera/mic unavailable:",err);return false}
+  }
+  window.__requestReactiveAccess__=requestReactiveAccess;window.__triggerReveal__=triggerReveal;
+  setInterval(()=>{if(camReady&&camCtx&&camPreview.readyState>=2)camCtx.drawImage(camPreview,0,0,32,24)},80);
+}
+
+const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const smoothScrollTo=y=>window.scrollTo({top:y,behavior:reduced?"auto":"smooth"});
+document.getElementById("enter").addEventListener("click",()=>smoothScrollTo(document.getElementById("s1").offsetTop));
+
+function revealText(section){
+  const spans=section.querySelectorAll(".reveal-lines span");if(!spans.length)return;
+  gsap.fromTo(spans,{y:22,opacity:0},{y:0,opacity:1,duration:.8,stagger:.7,ease:"power2.out",scrollTrigger:{trigger:section,start:"top 55%",toggleActions:"play none none reverse"}});
+}
+if(!reduced){
+  gsap.to("#s0 .moon",{y:45,x:-25,scale:1.08,scrollTrigger:{trigger:"#s0",start:"top top",end:"bottom top",scrub:1.5}});
+  gsap.to("#s0 .field",{y:-70,scale:1.06,scrollTrigger:{trigger:"#s0",start:"top top",end:"bottom top",scrub:2}});
+  gsap.to(".opening-content",{y:-100,opacity:.2,scrollTrigger:{trigger:"#s0",start:"top top",end:"bottom top",scrub:1}});
+  gsap.to("#s1 .sun",{x:"30vw",y:"-8vh",scale:1.35,scrollTrigger:{trigger:"#s1",start:"top bottom",end:"bottom top",scrub:1.5}});
+  gsap.to("#s1 .hills",{x:"-8%",y:"-4%",scale:1.08,scrollTrigger:{trigger:"#s1",start:"top bottom",end:"bottom top",scrub:2}});
+  gsap.to("#s1 .grass",{x:"8%",y:"-5%",scrollTrigger:{trigger:"#s1",start:"top bottom",end:"bottom top",scrub:1.2}});revealText(document.querySelector("#s1"));
+  gsap.to("#plane",{left:"112%",top:"40%",scrollTrigger:{trigger:"#s2",start:"top top",end:"bottom top",scrub:1.8}});
+  gsap.to(".flight",{scaleX:1,scrollTrigger:{trigger:"#s2",start:"top 75%",end:"top 20%",scrub:1}});
+  gsap.to("#s2 .cloud",{x:"18%",scrollTrigger:{trigger:"#s2",start:"top bottom",end:"bottom top",scrub:2}});revealText(document.querySelector("#s2"));
+  gsap.to("#s3 .rain",{x:"-12%",y:"8%",opacity:.15,scrollTrigger:{trigger:"#s3",start:"top top",end:"bottom top",scrub:1.5}});
+  gsap.to("#s3 .window-light",{scale:1.25,opacity:.9,scrollTrigger:{trigger:"#s3",start:"top 65%",end:"bottom 35%",scrub:1.4}});revealText(document.querySelector("#s3"));
+  gsap.fromTo("#s3 .fight",{opacity:0,y:35},{opacity:1,y:0,duration:1.1,scrollTrigger:{trigger:"#s3 .fight",start:"top 70%",toggleActions:"play none none reverse"}});
+  gsap.to(".path.a",{width:"48%",rotation:2,scrollTrigger:{trigger:"#s4",start:"top 70%",end:"bottom 30%",scrub:1}});
+  gsap.to(".path.b",{width:"48%",rotation:-2,scrollTrigger:{trigger:"#s4",start:"top 70%",end:"bottom 30%",scrub:1}});
+  gsap.to("#s4 .window2",{y:"-5%",scale:1.08,scrollTrigger:{trigger:"#s4",start:"top bottom",end:"bottom top",scrub:1.5}});revealText(document.querySelector("#s4"));
+  gsap.to(".light.l",{x:"13vw",scrollTrigger:{trigger:"#s5",start:"top 65%",end:"bottom 35%",scrub:1.7}});
+  gsap.to(".light.r",{x:"-13vw",scrollTrigger:{trigger:"#s5",start:"top 65%",end:"bottom 35%",scrub:1.7}});
+  gsap.fromTo("#s5 .content",{scale:.94,opacity:.25},{scale:1,opacity:1,scrollTrigger:{trigger:"#s5",start:"top 70%",end:"center center",scrub:1}});
+  gsap.to("#s6 .sunset",{scale:1.18,opacity:.82,scrollTrigger:{trigger:"#s6",start:"top bottom",end:"bottom top",scrub:1.6}});
+  gsap.to("#s6 .ground",{y:"-5%",scrollTrigger:{trigger:"#s6",start:"top bottom",end:"bottom top",scrub:1}});
+  gsap.from(".ritual span",{y:20,opacity:0,stagger:.12,duration:.5,scrollTrigger:{trigger:"#s6 .ritual",start:"top 78%",toggleActions:"play none none reverse"}});
+  gsap.utils.toArray(".final-lines div").forEach(el=>gsap.to(el,{opacity:1,duration:.6,scrollTrigger:{trigger:el,start:"top 78%",toggleActions:"play none none reverse"}}));
+  gsap.from(".final .names",{y:25,opacity:0,duration:1,scrollTrigger:{trigger:"#s7",start:"top 55%",toggleActions:"play none none reverse"}});
+  gsap.from(".thank-you",{y:15,opacity:0,duration:1,delay:.25,scrollTrigger:{trigger:"#s7",start:"top 55%",toggleActions:"play none none reverse"}});
+}
+
+addEventListener("scroll",()=>{
+  const max=document.documentElement.scrollHeight-innerHeight,p=max>0?scrollY/max:0;
+  document.getElementById("progressBar").style.height=p*150+"px";
+},{passive:true});
+
+let audioCtx=null,gain=null,osc=null,playing=false;
+function startSound(){
+  if(playing)return;
+  try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();gain=audioCtx.createGain();gain.gain.value=.018;gain.connect(audioCtx.destination);osc=audioCtx.createOscillator();osc.type="sine";osc.frequency.value=174;osc.connect(gain);osc.start();playing=true;document.getElementById("sound").textContent="sound on"}catch(e){}
+}
+function stopSound(){
+  if(!audioCtx)return;
+  gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.4);setTimeout(()=>{try{audioCtx.close()}catch(e){}},450);playing=false;document.getElementById("sound").textContent="sound off";
+}
+document.getElementById("sound").addEventListener("click",()=>playing?stopSound():startSound());
+document.getElementById("enter").addEventListener("click",startSound);
+</script>
+</body>
+</html>
