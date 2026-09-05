@@ -23,11 +23,11 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;op
 .scene{height:100vh;min-height:680px;position:relative;overflow:hidden}
 .scene-inner{position:absolute;inset:0}
 .bg{position:absolute;inset:-8%;will-change:transform}
-.chapter-label{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,238,229,.58);margin-bottom:1rem}
+.chapter-label{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,238,229,.85);margin-bottom:.5rem}
 h1,h2,p{margin:0}
 .title{font-family:"Cormorant Garamond",serif;font-weight:500;line-height:.9;letter-spacing:-.03em}
 .script{font-family:"Kalam",cursive;font-weight:300}
-.copy{max-width:580px;font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.8;color:rgba(244,238,229,.82)}
+.copy{max-width:580px;font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.6;color:rgba(244,238,229,.95)}
 .eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
 .center{display:grid;place-items:center;text-align:center}
 .vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.22) 72%,rgba(0,0,0,.62));pointer-events:none}
@@ -37,15 +37,35 @@ h1,h2,p{margin:0}
 .progress{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:80;width:1px;height:150px;background:rgba(255,255,255,.12)}
 .progress span{display:block;width:1px;height:0;background:var(--gold)}
 
+/* Visual Box Wrappers & Text Contrast Enhancements */
+.content, .opening-content, #s5 .content, #s6 .content, #s7 .content, .final {
+  background: rgba(18, 15, 20, 0.78);
+  border: 1px solid rgba(198, 157, 98, 0.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 24px 32px;
+  border-radius: 8px;
+  margin: 12px;
+}
+#s1 .content { max-width: 860px; }
+#s2 .content { max-width: 680px; }
+#s3 .content { max-width: 640px; }
+#s4 .content { max-width: 800px; }
+#s5 .content { max-width: 640px; position: absolute; inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+#s6 .content { max-width: 720px; margin-left: auto; margin-right: auto; }
+#s7 .content { max-width: 820px; }
+.final { position: absolute; right: 4vw; bottom: 8vh; text-align: right; }
+
 /* Opening */
 #s0{background:radial-gradient(circle at 50% 70%,#3a2d2c 0,#1b181d 48%,#0d0c0e 100%)}
 #s0 .moon{position:absolute;width:12vw;height:12vw;min-width:100px;min-height:100px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff5da,#d9c7a1 58%,#907d66);box-shadow:0 0 90px rgba(232,204,151,.22);top:20%;right:19%}
 #s0 .field{position:absolute;bottom:-12%;left:-5%;width:110%;height:45%;background:linear-gradient(170deg,#29332d,#131a17);clip-path:ellipse(58% 58% at 50% 80%)}
-.opening-content{position:relative;z-index:2}
-.opening-content .title{font-size:clamp(5rem,15vw,13rem)}
-.opening-content .subtitle{margin-top:25px;font-family:"Kalam";font-size:clamp(1.1rem,2vw,1.6rem);color:#d6c4a8}
-.enter{margin-top:50px;display:inline-flex;align-items:center;gap:14px;color:var(--cream);font:inherit;background:none;border:0;cursor:pointer;letter-spacing:.2em;text-transform:uppercase;font-size:.65rem}
-.enter b{width:36px;height:36px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;font-weight:300}
+.opening-content{position:relative;z-index:2; display: inline-block;}
+.opening-content .title{font-size:clamp(4rem,12vw,10rem)}
+.opening-content .subtitle{margin-top:15px;font-family:"Kalam";font-size:clamp(1.1rem,2vw,1.6rem);color:#d6c4a8}
+.enter{margin-top:30px;display:inline-flex;align-items:center;gap:14px;color:var(--cream);font:inherit;background:rgba(255,255,255,0.05);border:1px solid rgba(198,157,98,0.4);padding:10px 20px;border-radius:30px;cursor:pointer;letter-spacing:.2em;text-transform:uppercase;font-size:.65rem}
+.enter b{width:30px;height:30px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;font-weight:300}
 
 /* Chapter 1 */
 #s1{background:#b9c9bb}
@@ -53,10 +73,10 @@ h1,h2,p{margin:0}
 #s1 .sun{position:absolute;width:26vw;height:26vw;border-radius:50%;background:#f2d39d;filter:blur(1px);left:13%;top:17%;box-shadow:0 0 100px rgba(244,208,142,.6)}
 #s1 .hills{position:absolute;bottom:-8%;width:115%;height:47%;left:-7%;background:#52685b;clip-path:polygon(0 65%,12% 48%,22% 58%,35% 36%,49% 56%,62% 39%,76% 57%,89% 31%,100% 52%,100% 100%,0 100%)}
 #s1 .grass{position:absolute;bottom:-12%;width:115%;height:33%;left:-7%;background:#34463c;border-radius:50% 50% 0 0/25% 25% 0 0}
-#s1 .content{position:relative;z-index:3;padding:10vh 9vw}
-#s1 .title{font-size:clamp(4rem,10vw,9rem);color:#292728;max-width:800px}
-#s1 .copy{color:#373133;margin-top:32px}
-.reveal-lines span{display:block;opacity:0;transform:translateY(22px)}
+#s1 .content{position:relative;z-index:3;padding:6vh 6vw; margin-top: 6vh; margin-left: 6vw;}
+#s1 .title{font-size:clamp(3.5rem,8vw,7.5rem);color:#f4eee5;max-width:800px}
+#s1 .copy{color:#f4eee5;margin-top:20px}
+.reveal-lines span{display:block;opacity:0;transform:translateY(22px); margin-bottom: 6px;}
 
 /* Chapter 2 */
 #s2{background:#7b9bb5}
@@ -67,15 +87,15 @@ h1,h2,p{margin:0}
 #plane:before{content:"";position:absolute;left:0;top:15px;width:88px;height:3px;background:#f3eee3;border-radius:10px;transform:skew(-15deg)}
 #plane:after{content:"";position:absolute;left:38px;top:2px;border-left:27px solid transparent;border-right:8px solid transparent;border-bottom:15px solid #f3eee3;transform:rotate(10deg)}
 .flight{position:absolute;left:0;top:49%;height:1px;width:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:scaleX(0);transform-origin:left}
-#s2 .content{position:absolute;left:9vw;top:19%;z-index:4;max-width:600px}
-#s2 .title{font-size:clamp(4rem,9vw,8.5rem)}
-#s2 .copy{margin-top:30px}
-.distance{font-family:"Cormorant Garamond";font-size:clamp(5rem,13vw,12rem);line-height:.75;margin-top:35px;color:#fff0cf}
+#s2 .content{position:absolute;left:6vw;top:12vh;z-index:4;max-width:600px}
+#s2 .title{font-size:clamp(3.5rem,7vw,7rem)}
+#s2 .copy{margin-top:20px}
+.distance{font-family:"Cormorant Garamond";font-size:clamp(4rem,10vw,9rem);line-height:.8;margin-top:20px;color:#fff0cf; text-shadow: 0 4px 12px rgba(0,0,0,0.5);}
 
 /* Chapter 3 */
 #s3{background:#20222b}
 #s3 .rain{position:absolute;inset:-20%;background-image:linear-gradient(105deg,transparent 47%,rgba(210,221,235,.18) 48%,transparent 49%);background-size:12px 34px;transform:rotate(8deg)}
-#s3 .window{position:absolute;left:9vw;top:12vh;width:34vw;height:76vh;border:10px solid rgba(24,24,27,.72);box-shadow:0 0 80px rgba(0,0,0,.4);background:linear-gradient(#252b39,#101219);overflow:hidden;z-index:8}
+#s3 .window{position:absolute;left:6vw;top:12vh;width:34vw;height:76vh;border:10px solid rgba(24,24,27,.72);box-shadow:0 0 80px rgba(0,0,0,.4);background:linear-gradient(#252b39,#101219);overflow:hidden;z-index:8}
 #s3 .window-light{position:absolute;width:80%;height:80%;left:10%;top:10%;background:radial-gradient(circle,#6b7284 0,#293040 45%,#12141b 75%);opacity:.55;z-index:1}
 #s3 .polaroid-frame{
   position:absolute;
@@ -90,16 +110,16 @@ h1,h2,p{margin:0}
   box-shadow:0 18px 45px rgba(0,0,0,.45),0 3px 12px rgba(0,0,0,.3);
   filter:saturate(.92) contrast(1.04);
 }
-#s3 .content{position:absolute;right:8vw;top:20%;width:42vw;z-index:12}
-#s3 .title{font-size:clamp(4rem,9vw,8.5rem)}
-#s3 .copy{margin-top:30px}
-#s3 .fight{margin-top:45px;font-family:"Cormorant Garamond";font-size:clamp(2.8rem,6vw,6rem);color:#e5c89b}
+#s3 .content{position:absolute;right:6vw;top:12vh;width:44vw;z-index:12}
+#s3 .title{font-size:clamp(3.5rem,7vw,7rem)}
+#s3 .copy{margin-top:20px}
+#s3 .fight{margin-top:25px;font-family:"Cormorant Garamond";font-size:clamp(2.2rem,4vw,4.5rem);color:#e5c89b}
 
 /* Chapter 4 */
 #s4{background:#d8c9a8;color:#282327}
 #s4 .bg{background:linear-gradient(#a9c0c0 0%,#dfcfaa 55%,#8a9a73 100%)}
 #s4 .desk{position:absolute;bottom:0;left:-5%;width:110%;height:30%;background:#584438;transform:skewY(-2deg);z-index:2}
-#s4 .window2{position:absolute;right:10%;top:10%;width:27vw;height:44vh;background:linear-gradient(#91b4c4,#e5d2a7);border:10px solid #51453e;overflow:hidden;z-index:8}
+#s4 .window2{position:absolute;right:6%;top:10%;width:27vw;height:44vh;background:linear-gradient(#91b4c4,#e5d2a7);border:10px solid #51453e;overflow:hidden;z-index:8}
 #s4 .polaroid-frame2{
   position:absolute;
   inset:8px;
@@ -113,23 +133,23 @@ h1,h2,p{margin:0}
   box-shadow:0 18px 45px rgba(0,0,0,.38),0 3px 12px rgba(0,0,0,.25);
   filter:saturate(.95) contrast(1.04);
 }
-#s4 .content{position:absolute;left:9vw;top:14%;z-index:12;max-width:760px}
-#s4 .title{font-size:clamp(4rem,9vw,8.5rem)}
-#s4 .copy{margin-top:28px;color:#2c2529;background:rgba(250,246,238,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:20px 24px;border-radius:6px;box-shadow:0 14px 30px rgba(50,38,28,.2)}
-.milestones{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap}
+#s4 .content{position:absolute;left:6vw;top:10vh;z-index:12;max-width:720px}
+#s4 .title{font-size:clamp(3.5rem,7vw,7rem)}
+#s4 .copy{margin-top:20px;color:#f4eee5;background:rgba(18,15,20,0.85);border:1px solid rgba(198,157,98,0.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:16px 20px;border-radius:6px;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+.milestones{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
 .milestone{
   position:relative;
-  min-width:190px;
-  padding:18px 20px 17px;
-  background:rgba(250,246,238,.90);
-  border:1px solid rgba(70,58,48,.22);
-  border-radius:4px;
-  box-shadow:0 12px 28px rgba(55,42,32,.16),inset 0 1px rgba(255,255,255,.7);
+  min-width:170px;
+  padding:14px 16px;
+  background:rgba(18,15,20,0.85);
+  border:1px solid rgba(198,157,98,0.35);
+  border-radius:6px;
+  box-shadow:0 12px 28px rgba(0,0,0,.4);
   backdrop-filter:blur(8px);
 }
-.milestone::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#b78b58}
-.milestone strong{display:block;font-family:"Cormorant Garamond";font-size:1.65rem;line-height:1;font-weight:600;color:#292326}
-.milestone span{display:block;font-size:.78rem;line-height:1.5;margin-top:8px;color:#5c514c}
+.milestone::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.milestone strong{display:block;font-family:"Cormorant Garamond";font-size:1.5rem;line-height:1;font-weight:600;color:var(--cream)}
+.milestone span{display:block;font-size:.78rem;line-height:1.4;margin-top:6px;color:rgba(244,238,229,.8)}
 .paths{position:absolute;bottom:12%;left:0;width:100%;height:90px;z-index:3}
 .path{position:absolute;height:3px;width:42%;background:#4c5d4b;bottom:20px;border-radius:100%;transform-origin:left}
 .path.a{left:8%;transform:rotate(-5deg)}.path.b{right:8%;transform:rotate(5deg);transform-origin:right}
@@ -138,9 +158,9 @@ h1,h2,p{margin:0}
 #s5{background:#0d1117}
 #s5 .sky{background:radial-gradient(circle at 50% 45%,#38465c 0,#151c27 44%,#07090d 82%)}
 .star{position:absolute;width:3px;height:3px;border-radius:50%;background:#eee4c9;opacity:.7}
-#s5 .content{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:3}
-#s5 .title{font-size:clamp(5rem,14vw,12rem)}
-#s5 .copy{margin-top:30px;max-width:500px}
+#s5 .content{position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:3}
+#s5 .title{font-size:clamp(4rem,10vw,9rem)}
+#s5 .copy{margin-top:20px;max-width:520px}
 .light{position:absolute;width:18px;height:18px;border-radius:50%;background:#f3d7a3;box-shadow:0 0 55px 18px rgba(243,215,163,.16);bottom:26%;z-index:2}
 .light.l{left:34%}.light.r{right:34%}
 
@@ -149,30 +169,30 @@ h1,h2,p{margin:0}
 #s6 .bg{background:linear-gradient(#4f7180 0%,#d0ad83 52%,#4b2e26 100%)}
 #s6 .sunset{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);width:18vw;height:18vw;border-radius:50%;background:#f3c783;box-shadow:0 0 130px rgba(244,199,131,.5)}
 #s6 .ground{position:absolute;bottom:-8%;left:-5%;width:110%;height:40%;background:#392722;border-radius:50% 50% 0 0/18% 18% 0 0}
-#s6 .content{position:relative;z-index:4;text-align:center;padding-top:10vh}
-#s6 .title{font-size:clamp(4rem,10vw,9rem)}
-#s6 .copy{margin:30px auto 0;max-width:620px}
-.ritual{display:flex;justify-content:center;gap:10px;margin-top:35px;flex-wrap:wrap}
-.ritual span{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);padding:9px 12px;border-radius:100px;background:rgba(20,15,14,.12);backdrop-filter:blur(8px)}
+#s6 .content{position:relative;z-index:4;text-align:center;padding-top:6vh;max-width:700px;margin-left:auto;margin-right:auto}
+#s6 .title{font-size:clamp(3.5rem,8vw,7.5rem)}
+#s6 .copy{margin:20px auto 0;max-width:620px}
+.ritual{display:flex;justify-content:center;gap:10px;margin-top:25px;flex-wrap:wrap}
+.ritual span{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;border:1px solid rgba(198,157,98,0.4);padding:8px 14px;border-radius:100px;background:rgba(18,15,20,0.6);backdrop-filter:blur(8px)}
 
 /* Finale */
 #s7{background:#17141a}
 #s7 .sunrise{position:absolute;inset:0;background:linear-gradient(#16131a 0%,#2b2630 43%,#b67f68 78%,#e3bc91 100%)}
 #s7 .horizon{position:absolute;bottom:0;left:-5%;width:110%;height:28%;background:#292125;border-radius:50% 50% 0 0/25% 25% 0 0}
-#s7 .content{position:relative;z-index:3;padding:14vh 8vw}
-#s7 .title{font-size:clamp(4rem,10vw,9rem);max-width:900px}
-#s7 .copy{margin-top:40px}
-.final-lines{margin-top:40px;font-family:"Cormorant Garamond";font-size:clamp(1.5rem,3vw,2.8rem);line-height:1.35}
-.final-lines div{opacity:.25}
-.final{position:absolute;right:9vw;bottom:12vh;text-align:right;z-index:3}
-.final .names{font-family:"Cormorant Garamond";font-size:clamp(2.5rem,5vw,5rem)}
-.final .continued{font-family:"Kalam";font-size:1.4rem;color:#d5b482;margin-top:10px}
-.thank-you{margin-top:22px;font-family:"Kalam";font-size:clamp(1.15rem,2.2vw,1.6rem);color:#e1bd91;opacity:.9;line-height:1.4}
-.footer{margin-top:15px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.45}
+#s7 .content{position:relative;z-index:3;padding:8vh 6vw; margin-left: 6vw; margin-top: 6vh;}
+#s7 .title{font-size:clamp(3.5rem,8vw,7.5rem);max-width:900px}
+#s7 .copy{margin-top:25px}
+.final-lines{margin-top:25px;font-family:"Cormorant Garamond";font-size:clamp(1.3rem,2.5vw,2.2rem);line-height:1.3}
+.final-lines div{opacity:.3; margin-bottom: 4px;}
+.final{position:absolute;right:6vw;bottom:8vh;text-align:right;z-index:3}
+.final .names{font-family:"Cormorant Garamond";font-size:clamp(2.2rem,4vw,4rem)}
+.final .continued{font-family:"Kalam";font-size:1.2rem;color:#d5b482;margin-top:6px}
+.thank-you{margin-top:14px;font-family:"Kalam";font-size:clamp(1.05rem,1.8vw,1.4rem);color:#e1bd91;opacity:.9;line-height:1.3}
+.footer{margin-top:10px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.45}
 
 /* Three.js cinematic layer */
 #threeCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;opacity:.58;mix-blend-mode:screen}
-.three-caption{position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:6;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;opacity:.45;white-space:nowrap;pointer-events:none}
+.three-caption{position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);z-index:6;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;opacity:.6;white-space:nowrap;pointer-events:none;background:rgba(18,15,20,0.8);padding:6px 14px;border:1px solid rgba(198,157,98,0.3);border-radius:20px}
 #s2 .three-caption{color:#fff5df}#s5 .three-caption{color:#d8e8ff}#s6 .three-caption{color:#f5d4a0}
 
 /* Full-screen star veil */
@@ -192,21 +212,21 @@ h1,h2,p{margin:0}
 @media(max-width:800px){
   .scene{min-height:760px}
   .progress{left:10px;height:100px}
-  #s1 .content,#s2 .content,#s3 .content,#s4 .content,#s7 .content{left:7vw;right:7vw;width:auto;top:14%}
+  #s1 .content,#s2 .content,#s3 .content,#s4 .content,#s7 .content{left:4vw;right:4vw;width:auto;top:10vh}
   #s1 .sun{width:48vw;height:48vw;top:12%;left:10%}
   #s1 .hills{height:38%}
-  #s2 .content{top:17%}.distance{font-size:6rem}
-  #s3 .window{left:7vw;top:10vh;width:38vw;height:42vh}
-  #s3 .content{top:50%;width:auto}
-  #s4 .window2{width:38vw;height:30vh;right:7%;top:7%}
-  #s4 .content{top:36%}
-  .milestones{gap:10px;margin-top:30px}
-  .milestone{min-width:0;flex:1 1 140px;padding:15px 16px}
-  .milestone strong{font-size:1.4rem}
-  .milestone span{font-size:.72rem}
+  #s2 .content{top:12vh}.distance{font-size:5rem}
+  #s3 .window{left:4vw;top:10vh;width:38vw;height:42vh}
+  #s3 .content{top:50%;width:auto; right: 4vw;}
+  #s4 .window2{width:38vw;height:30vh;right:4%;top:7%}
+  #s4 .content{top:32vh}
+  .milestones{gap:8px;margin-top:15px}
+  .milestone{min-width:0;flex:1 1 130px;padding:10px 12px}
+  .milestone strong{font-size:1.2rem}
+  .milestone span{font-size:.7rem}
   .light.l{left:28%}.light.r{right:28%}
-  #s6 .content{padding:12vh 7vw 0}.ritual{gap:7px}
-  .final{left:7vw;right:7vw;bottom:9vh;text-align:left}
+  #s6 .content{padding:8vh 4vw 0}.ritual{gap:6px}
+  .final{left:4vw;right:4vw;bottom:6vh;text-align:left}
   #s7 .title{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){
@@ -427,8 +447,6 @@ window.__triggerReveal__=()=>{if(revealTriggered)return;revealTriggered=true;rev
     if(tapped)return;
     tapped=true;
     veilLine.textContent="hold a bright light close to the camera";
-    // The Three.js module loads asynchronously. Wait briefly for the real
-    // camera-access function instead of calling the temporary fallback.
     let ok=false;
     for(let i=0;i<80&&!ok;i++){
       if(typeof window.__requestReactiveAccess__==="function" &&
@@ -564,9 +582,6 @@ if(window.THREE&&threeLayer){
     if(ambientBrightness===null){ambientBrightness=b;return}
     if(!flashOn){if(b<ambientBrightness)ambientBrightness=b;else ambientBrightness+=(b-ambientBrightness)*.0025}
     const jump=b-ambientBrightness;
-    // A phone flashlight close to the front camera causes a sharp rise in
-    // average frame brightness. Detect both a strong jump and a sustained
-    // bright frame so the reveal is reliable on mobile.
     if(!flashOn){
       if(jump>.10 || b>.62) flashOn=true;
     }else if(jump<.035 && b<.55){
@@ -585,20 +600,25 @@ if(window.THREE&&threeLayer){
   function animate3(t){
     requestAnimationFrame(animate3);const tSec=t*.001,dt=Math.min(.05,tSec-lastT||0);lastT=tSec;const time=t*.00025;
     const camNow=camLevel(),voice=micLevel(),level=getLevel(),pos=geo.attributes.position.array,boosted=revealed?level*1.8:level;
-    burstEnergy*=.945;const breath=.05+boosted*.28+burstEnergy*1.5;
+    
+    /* Highly sensitive sound & audio reaction for particles */
+    let audioReact = voice * 8.5 + boosted * 3.5;
+    burstEnergy*=.945;
+    const breath=.05+audioReact*0.8+burstEnergy*2.5;
+
     for(let i=0;i<count;i++){const i3=i*3,ph=phases[i];pos[i3]=base[i3]+Math.sin(time*2.1+ph)*breath;pos[i3+1]=base[i3+1]+Math.cos(time*1.7+ph)*breath*.72;pos[i3+2]=base[i3+2]+Math.sin(time*1.2+ph)*breath*.35}
     geo.attributes.position.needsUpdate=true;points.rotation.y=time*.65;points.rotation.x=Math.sin(time*.6)*.04;
-    const shimmer=Math.sin(tSec*1.4)*.06+Math.sin(tSec*3.1+1.7)*.04;mat.opacity=.34+shimmer+boosted*.4;mat.size=.045+boosted*.05;
+    const shimmer=Math.sin(tSec*1.4)*.06+Math.sin(tSec*3.1+1.7)*.04;mat.opacity=Math.min(1, .34+shimmer+audioReact*0.5);mat.size=.045+audioReact*0.12;
     updateMeteors(dt,boosted,tSec);
-    voiceSmoothed+=(voice-voiceSmoothed)*(voice>voiceSmoothed?.55:.12);
-    const fPos=fieldGeo.attributes.position.array,fBreath=.06+voiceSmoothed*.85+burstEnergy*1.1;
+    voiceSmoothed+=(voice-voiceSmoothed)*(voice>voiceSmoothed?.75:.2);
+    const fPos=fieldGeo.attributes.position.array,fBreath=.06+voiceSmoothed*2.2+burstEnergy*1.5;
     for(let i=0;i<FIELD_COUNT;i++){
       const i3=i*3,ph=fieldPhase[i];flowY[i]+=driftState.y*dt*.5;flowX[i]+=driftState.x*dt*.5;
       if(flowY[i]>3.2)flowY[i]-=6.4;if(flowY[i]<-3.2)flowY[i]+=6.4;if(flowX[i]>6)flowX[i]-=12;if(flowX[i]<-6)flowX[i]+=12;
       fPos[i3]=fieldBase[i3]+Math.sin(time*1.6+ph)*fBreath+flowX[i]*.35;fPos[i3+1]=fieldBase[i3+1]+Math.cos(time*1.3+ph)*fBreath*.7+flowY[i]*.35;fPos[i3+2]=fieldBase[i3+2]+Math.sin(time*.9+ph)*fBreath*.4;
     }
     fieldGeo.attributes.position.needsUpdate=true;chapterField.rotation.y=time*.22;
-    fieldMat.size=(chapterLooks[chapterState]||chapterLooks[0]).size*(1+voiceSmoothed*1.6);fieldMat.opacity=Math.min(1,(chapterLooks[chapterState]||chapterLooks[0]).opacity+voiceSmoothed*.28);chapterGroup.scale.setScalar(1+voiceSmoothed*.14);
+    fieldMat.size=(chapterLooks[chapterState]||chapterLooks[0]).size*(1+voiceSmoothed*3.5);fieldMat.opacity=Math.min(1,(chapterLooks[chapterState]||chapterLooks[0]).opacity+voiceSmoothed*.5);chapterGroup.scale.setScalar(1+voiceSmoothed*.3);
     if(chapterState===2){route.position.y=Math.sin(tSec*.7)*.03;route.rotation.z=Math.sin(tSec*.25)*.025}
     if(chapterState===5){const kk=(Math.sin(tSec*.8)+1)/2;orbA.position.x=-2.5+kk*2;orbB.position.x=2.5-kk*2;orbA.position.y=orbB.position.y=-1.2+Math.sin(tSec)*.06}
     updateLightGate(camNow);tiltX+=(tiltTargetX-tiltX)*.06;tiltY+=(tiltTargetY-tiltY)*.06;scene3.rotation.y=tiltX*.18;scene3.rotation.x=-tiltY*.12;camera3.position.x=tiltX*.6;camera3.position.y=-tiltY*.4;camera3.lookAt(0,0,0);renderer3.render(scene3,camera3);
@@ -610,8 +630,18 @@ if(window.THREE&&threeLayer){
   async function requestReactiveAccess(){
     if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return false;
     try{
-      camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"user"},width:{ideal:160},height:{ideal:120}},audio:false});
-      camPreview.srcObject=camStream;await camPreview.play();camCanvas=document.createElement("canvas");camCanvas.width=32;camCanvas.height=24;camCtx=camCanvas.getContext("2d",{willReadFrequently:true});camReady=true;
+      camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"user"},width:{ideal:160},height:{ideal:120}},audio:true});
+      camPreview.srcObject=camStream;await camPreview.play();
+      
+      const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+      const micSource=audioCtx.createMediaStreamSource(camStream);
+      micAnalyser=audioCtx.createAnalyser();
+      micAnalyser.fftSize=512;
+      micSource.connect(micAnalyser);
+      micData=new Uint8Array(micAnalyser.frequencyBinCount);
+      micReady=true;
+
+      camCanvas=document.createElement("canvas");camCanvas.width=32;camCanvas.height=24;camCtx=camCanvas.getContext("2d",{willReadFrequently:true});camReady=true;
       return true;
     }catch(err){console.warn("Camera/mic unavailable:",err);return false}
   }
@@ -659,16 +689,10 @@ addEventListener("scroll",()=>{
   document.getElementById("progressBar").style.height=p*150+"px";
 },{passive:true});
 
-/* Background music — YouTube video used as an invisible audio-only player.
-   Browser autoplay rules still require the first play to happen from a user gesture. */
 const YOUTUBE_VIDEO_ID = "8Lmw2xE2OAw";
 let ytPlayer = null;
 let ytReady = false;
 let ytStarted = false;
-// The very first tap/click/key often happens *before* the YouTube player
-// has finished loading (it's competing with GSAP/Three.js on page load).
-// Remember that a gesture happened so we can retry the instant the player
-// becomes ready, instead of silently giving up on a one-shot listener.
 let gestureReceived = false;
 
 function loadYouTubeAPI(){
@@ -723,13 +747,9 @@ async function setupYouTubeAudio(){
       onReady:event=>{
         ytReady=true;
         event.target.setVolume(100);
-        // A gesture may already have happened while we were still loading
-        // the player — start now instead of waiting for another one.
         if(gestureReceived) startSound();
       },
       onStateChange:event=>{
-        // Keep it playing at max volume for the whole visit, and loop
-        // back to the start instead of stopping when the track ends.
         if(event.data===YT.PlayerState.ENDED){
           event.target.seekTo(0);
           event.target.playVideo();
@@ -738,8 +758,6 @@ async function setupYouTubeAudio(){
         }
       },
       onError:event=>{
-        // 2: bad video id, 5: HTML5 player error, 100: video not found/private,
-        // 101 & 150: the video owner has disabled embedding on other sites.
         const reasons={2:"invalid video ID",5:"HTML5 player error",100:"video not found or private",101:"embedding disabled by the video owner",150:"embedding disabled by the video owner"};
         console.warn("Background audio failed to load — YouTube error "+event.data+": "+(reasons[event.data]||"unknown error"));
       }
@@ -749,7 +767,6 @@ async function setupYouTubeAudio(){
 
 setupYouTubeAudio();
 
-/* Start at the earliest intentional user interaction, then keep it playing. */
 const beginAudio=()=>startSound();
 document.addEventListener("pointerdown",beginAudio,{once:true,passive:true});
 document.addEventListener("keydown",beginAudio,{once:true});
