@@ -36,7 +36,6 @@ h1,h2,p{margin:0}
 .scroll-cue i{width:1px;height:42px;background:linear-gradient(var(--gold),transparent);display:block}
 .progress{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:80;width:1px;height:150px;background:rgba(255,255,255,.12)}
 .progress span{display:block;width:1px;height:0;background:var(--gold)}
-.sound{position:fixed;right:22px;top:22px;z-index:90;border:1px solid rgba(255,255,255,.16);background:rgba(20,18,21,.25);backdrop-filter:blur(10px);color:var(--cream);border-radius:100px;padding:9px 13px;font:inherit;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
 
 /* Opening */
 #s0{background:radial-gradient(circle at 50% 70%,#3a2d2c 0,#1b181d 48%,#0d0c0e 100%)}
@@ -116,7 +115,7 @@ h1,h2,p{margin:0}
 }
 #s4 .content{position:absolute;left:9vw;top:14%;z-index:12;max-width:760px}
 #s4 .title{font-size:clamp(4rem,9vw,8.5rem)}
-#s4 .copy{margin-top:28px;color:#41383a}
+#s4 .copy{margin-top:28px;color:#2c2529;background:rgba(250,246,238,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:20px 24px;border-radius:6px;box-shadow:0 14px 30px rgba(50,38,28,.2)}
 .milestones{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap}
 .milestone{
   position:relative;
@@ -193,7 +192,6 @@ h1,h2,p{margin:0}
 @media(max-width:800px){
   .scene{min-height:760px}
   .progress{left:10px;height:100px}
-  .sound{right:12px;top:12px}
   #s1 .content,#s2 .content,#s3 .content,#s4 .content,#s7 .content{left:7vw;right:7vw;width:auto;top:14%}
   #s1 .sun{width:48vw;height:48vw;top:12%;left:10%}
   #s1 .hills{height:38%}
@@ -224,7 +222,6 @@ h1,h2,p{margin:0}
 <div id="lightMask"></div>
 
 <div id="film">
-  <button class="sound" id="sound">sound off</button>
   <div class="progress"><span id="progressBar"></span></div>
 
   <section class="scene center" id="s0">
@@ -382,7 +379,8 @@ const camPreview=document.getElementById("camPreview");
 let camStream=null,camCanvas=null,camCtx=null,camReady=false,micReady=false;
 let micAnalyser=null,micData=null,revealed=false,revealTriggered=false,burstEnergy=0;
 
-window.__requestReactiveAccess__=async()=>false;
+window.__reactiveAccessFallback__=async()=>false;
+window.__requestReactiveAccess__=window.__reactiveAccessFallback__;
 window.__triggerReveal__=()=>{if(revealTriggered)return;revealTriggered=true;revealed=true;if(window.__disperseVeil)window.__disperseVeil()};
 
 (function setupStarVeil(){
@@ -429,7 +427,17 @@ window.__triggerReveal__=()=>{if(revealTriggered)return;revealTriggered=true;rev
     if(tapped)return;
     tapped=true;
     veilLine.textContent="hold a bright light close to the camera";
-    const ok=await window.__requestReactiveAccess__();
+    // The Three.js module loads asynchronously. Wait briefly for the real
+    // camera-access function instead of calling the temporary fallback.
+    let ok=false;
+    for(let i=0;i<80&&!ok;i++){
+      if(typeof window.__requestReactiveAccess__==="function" &&
+         window.__requestReactiveAccess__!==window.__reactiveAccessFallback__){
+        ok=await window.__requestReactiveAccess__();
+        break;
+      }
+      await new Promise(r=>setTimeout(r,50));
+    }
     if(!ok){
       veilLine.textContent="camera access is needed to begin";
       tapped=false;
@@ -519,8 +527,10 @@ if(window.THREE&&threeLayer){
     if(!(camReady&&camCtx&&camCanvas))return{level:0,brightness:null,delta:0};
     const d=camCtx.getImageData(0,0,32,24).data;let sum=0;
     for(let i=0;i<d.length;i+=4)sum+=(d[i]+d[i+1]+d[i+2])/3;
-    const brightness=sum/(d.length/4)/255,delta=lastCamBrightness===null?0:Math.abs(brightness-lastCamBrightness);lastCamBrightness=brightness;
-    return{level:Math.min(1,delta*14+brightness*.3),brightness,delta};
+    const brightness=sum/(d.length/4)/255;
+    const delta=lastCamBrightness===null?0:Math.abs(brightness-lastCamBrightness);
+    lastCamBrightness=brightness;
+    return{level:Math.min(1,delta*18+brightness*.4),brightness,delta};
   }
   function micLevel(){
     if(!(micReady&&micAnalyser))return 0;micAnalyser.getByteTimeDomainData(micData);let sumSq=0;
@@ -554,7 +564,14 @@ if(window.THREE&&threeLayer){
     if(ambientBrightness===null){ambientBrightness=b;return}
     if(!flashOn){if(b<ambientBrightness)ambientBrightness=b;else ambientBrightness+=(b-ambientBrightness)*.0025}
     const jump=b-ambientBrightness;
-    if(!flashOn){if(jump>.14||b>.68)flashOn=true}else if(jump<.06)flashOn=false;
+    // A phone flashlight close to the front camera causes a sharp rise in
+    // average frame brightness. Detect both a strong jump and a sustained
+    // bright frame so the reveal is reliable on mobile.
+    if(!flashOn){
+      if(jump>.10 || b>.62) flashOn=true;
+    }else if(jump<.035 && b<.55){
+      flashOn=false;
+    }
   }
   function updateLightGate(camNow){
     trackAmbient(camNow);if(!lightMask)return;
@@ -593,10 +610,8 @@ if(window.THREE&&threeLayer){
   async function requestReactiveAccess(){
     if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return false;
     try{
-      camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"user"},width:{ideal:160},height:{ideal:120}},audio:true});
+      camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"user"},width:{ideal:160},height:{ideal:120}},audio:false});
       camPreview.srcObject=camStream;await camPreview.play();camCanvas=document.createElement("canvas");camCanvas.width=32;camCanvas.height=24;camCtx=camCanvas.getContext("2d",{willReadFrequently:true});camReady=true;
-      const audioTracks=camStream.getAudioTracks();
-      if(audioTracks.length){const ac=new(window.AudioContext||window.webkitAudioContext)(),source=ac.createMediaStreamSource(new MediaStream(audioTracks));micAnalyser=ac.createAnalyser();micAnalyser.fftSize=256;micData=new Uint8Array(micAnalyser.frequencyBinCount);source.connect(micAnalyser);micReady=true}
       return true;
     }catch(err){console.warn("Camera/mic unavailable:",err);return false}
   }
@@ -644,16 +659,101 @@ addEventListener("scroll",()=>{
   document.getElementById("progressBar").style.height=p*150+"px";
 },{passive:true});
 
-let audioCtx=null,gain=null,osc=null,playing=false;
-function startSound(){
-  if(playing)return;
-  try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();gain=audioCtx.createGain();gain.gain.value=.018;gain.connect(audioCtx.destination);osc=audioCtx.createOscillator();osc.type="sine";osc.frequency.value=174;osc.connect(gain);osc.start();playing=true;document.getElementById("sound").textContent="sound on"}catch(e){}
+/* Background music — YouTube video used as an invisible audio-only player.
+   Browser autoplay rules still require the first play to happen from a user gesture. */
+const YOUTUBE_VIDEO_ID = "8Lmw2xE2OAw";
+let ytPlayer = null;
+let ytReady = false;
+let ytStarted = false;
+// The very first tap/click/key often happens *before* the YouTube player
+// has finished loading (it's competing with GSAP/Three.js on page load).
+// Remember that a gesture happened so we can retry the instant the player
+// becomes ready, instead of silently giving up on a one-shot listener.
+let gestureReceived = false;
+
+function loadYouTubeAPI(){
+  return new Promise(resolve=>{
+    if(window.YT && window.YT.Player){ resolve(); return; }
+    const existing=document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+    if(existing){
+      const previous=window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady=()=>{ if(previous) previous(); resolve(); };
+      return;
+    }
+    window.onYouTubeIframeAPIReady=()=>resolve();
+    const script=document.createElement("script");
+    script.src="https://www.youtube.com/iframe_api";
+    document.head.appendChild(script);
+  });
 }
-function stopSound(){
-  if(!audioCtx)return;
-  gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.4);setTimeout(()=>{try{audioCtx.close()}catch(e){}},450);playing=false;document.getElementById("sound").textContent="sound off";
+
+async function startSound(){
+  gestureReceived = true;
+  if(ytStarted || !ytReady || !ytPlayer) return;
+  try{
+    ytPlayer.setVolume(100);
+    ytPlayer.unMute();
+    const playResult = ytPlayer.playVideo();
+    if(playResult && typeof playResult.catch === "function") playResult.catch(()=>{});
+    ytStarted=true;
+  }catch(e){ console.warn("Background audio could not start:",e); }
 }
-document.getElementById("sound").addEventListener("click",()=>playing?stopSound():startSound());
+
+async function setupYouTubeAudio(){
+  const host=document.createElement("div");
+  host.id="youtube-audio";
+  host.setAttribute("aria-hidden","true");
+  host.style.cssText="position:fixed;width:1px;height:1px;left:-10px;top:-10px;opacity:0;pointer-events:none;overflow:hidden;";
+  document.body.appendChild(host);
+
+  await loadYouTubeAPI();
+
+  ytPlayer=new YT.Player("youtube-audio",{
+    videoId:YOUTUBE_VIDEO_ID,
+    playerVars:{
+      autoplay:0,
+      controls:0,
+      disablekb:1,
+      fs:0,
+      modestbranding:1,
+      playsinline:1,
+      rel:0
+    },
+    events:{
+      onReady:event=>{
+        ytReady=true;
+        event.target.setVolume(100);
+        // A gesture may already have happened while we were still loading
+        // the player — start now instead of waiting for another one.
+        if(gestureReceived) startSound();
+      },
+      onStateChange:event=>{
+        // Keep it playing at max volume for the whole visit, and loop
+        // back to the start instead of stopping when the track ends.
+        if(event.data===YT.PlayerState.ENDED){
+          event.target.seekTo(0);
+          event.target.playVideo();
+        }else if(event.data===YT.PlayerState.PLAYING){
+          event.target.setVolume(100);
+        }
+      },
+      onError:event=>{
+        // 2: bad video id, 5: HTML5 player error, 100: video not found/private,
+        // 101 & 150: the video owner has disabled embedding on other sites.
+        const reasons={2:"invalid video ID",5:"HTML5 player error",100:"video not found or private",101:"embedding disabled by the video owner",150:"embedding disabled by the video owner"};
+        console.warn("Background audio failed to load — YouTube error "+event.data+": "+(reasons[event.data]||"unknown error"));
+      }
+    }
+  });
+}
+
+setupYouTubeAudio();
+
+/* Start at the earliest intentional user interaction, then keep it playing. */
+const beginAudio=()=>startSound();
+document.addEventListener("pointerdown",beginAudio,{once:true,passive:true});
+document.addEventListener("keydown",beginAudio,{once:true});
+
 document.getElementById("enter").addEventListener("click",startSound);
 </script>
 </body>
